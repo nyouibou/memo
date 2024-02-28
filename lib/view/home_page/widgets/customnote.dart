@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/utils/color_constants/color_constants.dart';
+import 'package:share_plus/share_plus.dart';
 
 class custonotewidget extends StatefulWidget {
   const custonotewidget({
@@ -94,10 +95,11 @@ class _custonotewidgetState extends State<custonotewidget> {
             children: [
               Text(widget.date),
               SizedBox(width: 10),
-              Icon(
-                Icons.share,
-                color: Colorconstants.mainblack,
-              )
+              IconButton(
+                  icon: Icon(Icons.share),
+                  onPressed: () {
+                    Share.share('check out my website https://example.com');
+                  })
             ],
           )
         ],

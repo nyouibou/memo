@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:note_app/controller/homepage_controller.dart';
 import 'package:note_app/utils/color_constants/color_constants.dart';
 
@@ -103,6 +104,33 @@ class _NoteListpageState extends State<NoteListpage> {
                 ),
                 SizedBox(height: 15),
                 TextFormField(
+                  controller: Homepagecontroller.datecontroller,
+                  decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
+                      label: Text(
+                        "Date",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(7),
+                        ),
+                      ),
+                      suffixIcon: InkWell(
+                          onTap: () async {
+                            final DateTime? pickedDate = await showDatePicker(
+                                context: context,
+                                firstDate: DateTime.now(),
+                                lastDate: DateTime(2025));
+                            if (pickedDate != null) {
+                              String formatedDate =
+                                  DateFormat("dd/MM/yyyy").format(pickedDate);
+                              Homepagecontroller.datecontroller.text =
+                                  formatedDate;
+                            }
+                          },
+                          child: Icon(Icons.calendar_today))),
                   validator: (value) {
                     // if (valobj.noteslist.isNotEmpty)
                     if (Homepagecontroller.datecontroller.text.isNotEmpty) {
@@ -111,20 +139,6 @@ class _NoteListpageState extends State<NoteListpage> {
                       return "enter a valid date";
                     }
                   },
-                  controller: Homepagecontroller.datecontroller,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    filled: true,
-                    label: Text(
-                      "Date",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(7),
-                      ),
-                    ),
-                  ),
                 ),
                 SizedBox(height: 15),
 
