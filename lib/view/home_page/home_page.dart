@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.white,
                       // delete
                       ondeletepressed: () {
-                        // saveobj.deleteData(index);
+                        saveobj.deleteData(index);
                         setState(() {});
                       },
 

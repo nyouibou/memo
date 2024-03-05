@@ -34,9 +34,10 @@ class Homepagecontroller {
 
   // functn to delete
 
-  // void deleteData(int index) {
-  //   noteslist.removeAt(index);
-  // }
+  void deleteData(var key) {
+    mybox.delete(key);
+    noteskeys = mybox.keys.toList();
+  }
 
   // fnctn to clear
   static void clearData() {
