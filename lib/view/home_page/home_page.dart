@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:note_app/controller/homepage_controller.dart';
 import 'package:note_app/utils/color_constants/color_constants.dart';
 import 'package:note_app/view/home_page/widgets/customnote.dart';
@@ -14,6 +15,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Homepagecontroller saveobj = Homepagecontroller();
+  var mybox = Hive.box('notebox');
+  @override
+  void initState() {
+    saveobj.init();
+    setState(() {});
+    super.initState();
+  }
+
   // Homepagecontroller deleteobj = Homepagecontroller();
 
   @override
@@ -28,7 +37,7 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         backgroundColor: Colorconstants.mainblack,
       ),
-      body: saveobj.noteslist.isEmpty
+      body: saveobj.noteskeys.isEmpty
           ? Center(
               child: Text(
                 "no data found",
@@ -42,24 +51,24 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.all(10),
                     child: custonotewidget(
-                      title: saveobj.noteslist[index]["title"],
-                      des: saveobj.noteslist[index]["des"],
-                      date: saveobj.noteslist[index]["date"],
-                      color: saveobj.noteslist[index]["color"],
+                      title: mybox.get(saveobj.noteskeys[index])["title"],
+                      des: mybox.get(saveobj.noteskeys[index])["des"],
+                      date: mybox.get(saveobj.noteskeys[index])["date"],
+                      color: Colors.white,
                       // delete
                       ondeletepressed: () {
-                        saveobj.deleteData(index);
+                        // saveobj.deleteData(index);
                         setState(() {});
                       },
 
                       // edit
                       oneditpressed: () {
-                        Homepagecontroller.titlecontroller.text =
-                            saveobj.noteslist[index]["title"];
-                        Homepagecontroller.descontroller.text =
-                            saveobj.noteslist[index]["des"];
-                        Homepagecontroller.datecontroller.text =
-                            saveobj.noteslist[index]["date"];
+                        // Homepagecontroller.titlecontroller.text =
+                        //     saveobj.noteslist[index]["title"];
+                        // Homepagecontroller.descontroller.text =
+                        //     saveobj.noteslist[index]["des"];
+                        // Homepagecontroller.datecontroller.text =
+                        //     saveobj.noteslist[index]["date"];
 
                         // to show bottom sheet
                         showModalBottomSheet(
@@ -70,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                               isedit: true,
 
                               onSavepressed: () {
-                                saveobj.editData(index);
+                                // saveobj.editData(index);
 
                                 setState(() {});
                                 Homepagecontroller.clearData();
@@ -89,7 +98,7 @@ class _HomePageState extends State<HomePage> {
               separatorBuilder: (context, index) => SizedBox(
                     height: 7,
                   ),
-              itemCount: saveobj.noteslist.length),
+              itemCount: saveobj.noteskeys.length),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
