@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                       title: mybox.get(saveobj.noteskeys[index])["title"],
                       des: mybox.get(saveobj.noteskeys[index])["des"],
                       date: mybox.get(saveobj.noteskeys[index])["date"],
-                      color: Colors.white,
+                      color: mybox.get(saveobj.noteskeys[index])["color"],
                       // delete
                       ondeletepressed: () {
                         saveobj.deleteData(index);
@@ -63,12 +63,12 @@ class _HomePageState extends State<HomePage> {
 
                       // edit
                       oneditpressed: () {
-                        // Homepagecontroller.titlecontroller.text =
-                        //     saveobj.noteslist[index]["title"];
-                        // Homepagecontroller.descontroller.text =
-                        //     saveobj.noteslist[index]["des"];
-                        // Homepagecontroller.datecontroller.text =
-                        //     saveobj.noteslist[index]["date"];
+                        Homepagecontroller.titlecontroller.text =
+                            mybox.get(saveobj.noteskeys[index])["title"];
+                        Homepagecontroller.descontroller.text =
+                            mybox.get(saveobj.noteskeys[index])["des"];
+                        Homepagecontroller.datecontroller.text =
+                            mybox.get(saveobj.noteskeys[index])["date"];
 
                         // to show bottom sheet
                         showModalBottomSheet(
@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                               isedit: true,
 
                               onSavepressed: () {
-                                // saveobj.editData(index);
+                                saveobj.editData(index);
 
                                 setState(() {});
                                 Homepagecontroller.clearData();

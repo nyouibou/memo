@@ -21,12 +21,6 @@ class NoteListpage extends StatefulWidget {
 }
 
 class _NoteListpageState extends State<NoteListpage> {
-  List colorslist = [
-    Colorconstants.containerone,
-    Colorconstants.containertwo,
-    Colorconstants.containerthree,
-    Colorconstants.containerfour
-  ];
   // TextEditingController titlecontroller = TextEditingController();
   // TextEditingController descontroller = TextEditingController();
   // TextEditingController datecontroller = TextEditingController();
